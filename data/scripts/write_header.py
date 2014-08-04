@@ -1,14 +1,17 @@
+"""Add headers to the CSV-file to make SQL import easier"""
 import csv
 
-f = open('processed_data/rc13.csv', 'r')
-reader = csv.reader(f, delimiter=";")
-line = reader.next()
-col_num = len(line)
+with open('processed_data/rc13.csv', 'r') as csv_in:
+    reader = csv.reader(csv_in, delimiter=";")
+     line = reader.next()
+     col_num = len(line)
+
 lhead = []
 for n in range(0, col_num):
-    col_num = n + 1
-    lhead.append('col'+str(col_num))
+    num = n + 1
+    shead = 'col'+str(num)
+    lhead.append(shead)
 
-with open('processed_data/rc13.csv', 'wb') as f2:
-    writer = csv.DictWriter(f2, fieldnames=lhead, delimiter=';')
+with open('processed_data/rc13.csv', 'wb') as csv_out:
+    writer = csv.DictWriter(csv_out, fieldnames=lhead, delimiter=';')
     writer.writeheader()

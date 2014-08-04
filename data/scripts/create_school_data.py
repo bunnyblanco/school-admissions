@@ -22,17 +22,33 @@ class School(Base):
     grades = Column(String(32))
 
 Base.metadata.create_all(db)
+lhead = Base.metadata.Tables['school'].Columns()
+#lhead = {
+#        'num',
+#        'type',
+#        'school',
+#        'district',
+#        'city',
+#        'county',
+#        'district_type',
+#        'district_size',
+#        'district_type_name',
+#        'district_size_name',
+#        'school_type_name',
+#        'grades'
+#    }
+#
 conn = db.connect()
 
 import csv
 #import csvkit
 """This doesn't use headers"""
 
-f = open('data/processed_data/rc13.csv', 'r')
-data = csv.reader(f, delimiter=';')
+csv_in = open('data/processed_data/rc13.csv', 'r')
+reader = csv.reader(f, delimiter=';')
 lrecord = {}
 lrecords = []
-for line in data:
+for line in reader:
     lrecord = {
         'num' : line[0],
         'type' : line[1],
